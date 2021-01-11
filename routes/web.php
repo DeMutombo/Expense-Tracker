@@ -25,3 +25,4 @@ Route::get('/home', [TransactionsController::class, 'index']);
 Route::get('/income', [IncomeController::class, 'index']);
 Route::get('/expenses', [ExpenseController::class, 'index']);
 Route::get('/fullStatement', [fullStatementController::class, 'index']);
+Route::post('/home', [TransactionsController::class, 'store']);

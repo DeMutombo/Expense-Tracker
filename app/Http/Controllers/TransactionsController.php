@@ -23,4 +23,19 @@ class TransactionsController extends Controller
             ->with('allIncome', $allIncome)
             ->with('remainingBalance', $balance)->with('quoteApi', $data);
     }
+
+    public function store()
+    {
+        $transaction = new Transactions();
+
+        $transaction->transaction_name = request('transaction_name');
+        $transaction->transaction_amount = request('transaction_amount');
+        $transaction->transaction_type_id = request('transaction_type');
+        $transaction->transaction_description = request('transaction_description');
+        $transaction->transaction_date = date('Y-m-d');
+
+        error_log($transaction);
+        $transaction->save();
+        return redirect('/home')->with('messg', 'Thank you, your transaction was recorded successfully!!');
+    }
 }

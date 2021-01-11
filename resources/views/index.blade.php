@@ -50,7 +50,7 @@
             <br>
         </form>
         <hr>
-        <h3>Mini Statement</h3><span>recent transaction</span>
+        <h3>Mini Statement</h3><span>5 Recent transaction</span>
         
         <table>
             <thead>
