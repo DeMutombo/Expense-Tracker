@@ -17,11 +17,7 @@
         @endif
 
         <div class="d-flex justify-content-center align-items-center">
-           <h1>Expense tracker</h1> {{ $quoteApi }} 
-           @if (property_exists($quoteApi, 'advice'))
-               {{ $quoteApi->advice }}
-            @else 'nothing'
-           @endif
+           <h1>Expense tracker</h1> {{-- $quoteApi --}} 
            <div class="income-expense d-flex flex-row bd-highlight mb-3 ">
                <div class="total-income">
                    <h3>INCOME - R {{ $allIncome }} / Remaining {{ $remainingBalance }} </h3><span class=""><a href="/income">view all income</a></span>
@@ -82,15 +78,6 @@
             </tr>
             @endforeach
         </tbody>
-        {{-- <tfoot>
-            <tr>
-                <td style="font-weight:700;">Total Remaining</td>
-                <td style="font-weight:700;"> R {{ $remainingBalance }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tfoot> --}}
     </table>
     <br><br>
         <a href="/fullStatement">View full Statement</a>

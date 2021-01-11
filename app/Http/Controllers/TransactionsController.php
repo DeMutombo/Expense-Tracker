@@ -10,10 +10,7 @@ use Illuminate\Support\Facades\DB;
 class TransactionsController extends Controller
 {
     public function index()
-    { // $total_expese = DB::table('expenses')->select('expense_amount')->get();
-        // $total_expese = DB::table('expenses')->value(DB::raw('SUM(expense_amount)'));
-        // $total_income = DB::table('incomes')->value(DB::raw('SUM(income_amount)'));
-        // $miniStatement = Transactions::All();
+    {
         $data = Http::get('https://api.adviceslip.com/advice')->body();
         $miniStatement = DB::table('transactions')->orderBy('id', 'desc')->limit(5)->get();
 
