@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Transactions;
 
 class fullStatementController extends Controller
 {
     public function index()
     {
-        return view('fullStatement');
+        $allTransaction = Transactions::all();
+        return view('fullStatement')->with('allTransaction', $allTransaction);
     }
 }
