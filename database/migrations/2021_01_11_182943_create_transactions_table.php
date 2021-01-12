@@ -17,8 +17,7 @@ class CreateTransactionsTable extends Migration
             $table->id();
             $table->string('transaction_name');
             $table->decimal('transaction_amount', 15, 2);
-            $table->unsignedBigInteger('transaction_type_id');
-            $table->foreign('transaction_type_id')->references('id')->on('transactions_types');
+            $table->string('transaction_type_id');
             $table->string('transaction_description');
             $table->dateTimeTz('transaction_date');
             $table->timestamps();
