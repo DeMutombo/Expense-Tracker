@@ -32,10 +32,10 @@ class TransactionsController extends Controller
         $transaction->transaction_amount = request('transaction_amount');
         $transaction->transaction_type_id = request('transaction_type');
         $transaction->transaction_description = request('transaction_description');
-        $transaction->transaction_date = date('Y-m-d');
+        $transaction->transaction_date = date('Y-m-d H:i:s');
 
-        error_log($transaction);
+        // error_log($transaction);
         $transaction->save();
-        return redirect('/home')->with('messg', 'Thank you, your transaction was recorded successfully!!');
+        return redirect('/home')->with('alert', 'Thank you, your transaction was recorded successfully!!');
     }
 }

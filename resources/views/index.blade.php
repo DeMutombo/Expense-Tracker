@@ -1,8 +1,8 @@
 @extends('layouts.layout')
 @section('content')    
 
-    <div class=" border border-black sm:container md:container lg:container mx-auto block bg-gray-100 p-8">
-      <div class="transaction mx-auto">
+    <div class="mx-auto block bg-gray-100 p-8">
+      <div class="transaction mx-auto p-5 bg-purple-200 overflow-hidden">
         @if (Route::has('login'))
         <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
             @auth
@@ -16,32 +16,29 @@
             @endauth
         </div>
         @endif
-
-        <div class="">
-           <h1 class="text-3xl">Expense tracker</h1> {{-- $quoteApi --}} 
-           
+           <h1 class="text-3xl">Expense tracker</h1> {{-- $quoteApi --}}            
            <div class=" flex justify-center">
-               <div class="total-income text-2xl  py-6 px-8 bg-purple-600 bg-opacity-75 ">
-                   <div class=" flex space-x-4">
-                       <div class="income flex-1"> <h3 class="space-y-4 ">INCOME - R {{ $allIncome }}</h3></div>
-                   </div>
-                   
-                   <span class="text-xs text-gray-300 hover:text-white "><a href="/income">view all income</a></span>
-               </div>
-               <div class=" align-middle `text-2xl py-6 px-8 bg-red-500 bg-opacity-75 ">                  
-                       <div class="text-white inline-block  ">Balance {{ $remainingBalance }} </div>
-               </div>
-             
-                <div class="ml-4 total-expenses text-2xl  py-6 px-8 bg-purple-600 bg-opacity-75 ">
-                    <h3>EXPENSES - R <span>{{ $totalExpense }}</span></h3>
-                    <span class="text-xs text-gray-300 hover:text-white"><a href="/expenses">view all expenses</a></span>
+             <div class="flex flex-auto">
+              <div class="total-income text-2xl  py-6 px-8 bg-indigo-800 ">
+                <div class=" flex space-x-4">
+                    <div class="income text-white inline-block font-semibold"> <h3 class="space-y-4 ">INCOME  <span class="block">R {{ $allIncome }}</span></h3></div>
                 </div>
+                <span class="text-xs text-gray-300 hover:text-white "><a href="/income">view all income</a></span>
             </div>
-               
-        </div>        
-        <hr>
-        {{ session('messg') }}
-        <hr>
+            <div class=" align-middle `text-2xl py-6 px-8  bg-indigo-500 ">                  
+                    <div class="text-white inline-block font-semibold  ">Balance {{ $remainingBalance }} </div>
+            </div>
+             </div>         
+             <div class="ml-4 total-expenses text-2xl  py-6 px-8 bg-red-500">
+                    <h3 class="text-white inline-block font-semibold  ">EXPENSES  <span class="block"> - R {{ $totalExpense }}</span></h3>
+                    <span class="text-xs text-gray-300 hover:text-white block"><a href="/expenses">view all expenses</a></span>
+                </div>
+            </div> 
+            @if (session('alert'))
+            <div class="mt-3 p-3 bg-green-400 text-gray-100 text rounded shadow"> 
+              {{ session('alert') }}
+            </div> 
+            @endif
         <br>
         <form action="/home" method="POST">
             @csrf   
@@ -73,7 +70,7 @@
                                 Transaction description
                             </label>
                             <div class="mt-1">
-                              <textarea id="about" name="transaction_description" rows="3" class="shadow-sm focus:ring-indigo-500 py-2 pl-3 focus:border-indigo-500 mt-1 block w-full sm:text-base border-gray-300 rounded-md" placeholder="Bought shoes in maraba"></textarea>
+                              <textarea id="about" name="transaction_description" rows="3" class="shadow-sm focus:ring-indigo-500 py-2 border pl-3 focus:border-indigo-500 mt-1 block w-full sm:text-base border-gray-300 rounded-md" placeholder="Bought shoes in maraba"></textarea>
                             </div>
                             <p class="mt-2 text-sm text-gray-500">
                               Brief description of the transaction.
@@ -98,34 +95,37 @@
 
         <!-- This example requires Tailwind CSS v2.0+ -->
         <div class="flex flex-col">
-          <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="-my-2 overflow-x-auto sm:-mx-5 lg:-mx-8">
             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
               <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                 <table class="min-w-full divide-y divide-gray-200">
                   <thead class="bg-gray-50">
                     <tr>
-                      <th scope="col"  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Transaction name</th>
-                      <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Transaction amout</th>
-                      <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Transaction Type</th>
-                      <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Transaction description</th>
-                      <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Transaction date</th>
+                      <th scope="col"  class="px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Transaction name</th>
+                      <th scope="col" class="px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Transaction amout</th>
+                      <th scope="col" class="px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Transaction Type</th>
+                      <th scope="col" class="px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Transaction description</th>
+                      <th scope="col" class="px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Transaction date</th>
                     </tr>
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
-                      @foreach ( $miniStatement as $statement )            
+                      @foreach ( $miniStatement as $statement )
+                                  
                       <tr>
-                          <td class="px-6 py-4 whitespace-nowrap "> {{ $statement->transaction_name }}</td>
-                          <td class="px-6 py-4 whitespace-nowrap "> @if ($statement->transaction_type_id == 2)
+                          <td class="px-3 py-1 text-xs whitespace-nowrap "> {{ $statement->transaction_name }}</td>
+                          <td class="px-3 py-1 text-xs whitespace-nowrap "> @if ($statement->transaction_type_id == 2)
                               -
                           @endif R {{ $statement->transaction_amount }} </td>
-                          <td class="px-6 py-4 whitespace-nowrap "> 
+                          <td class="px-3 py-1 text-xs whitespace-nowrap "> 
                               @if ($statement->transaction_type_id > 1)
                               Expense 
                               @else Income
                               @endif 
                           </td>
-                          <td class="px-6 py-4 whitespace-nowrap "> {{ $statement->transaction_description }}</td>
-                          <td class="px-6 py-4 whitespace-nowrap "> {{ $statement->transaction_date }}</td>
+                          <td class="px-3 py-1 text-xs whitespace-nowrap "> {{ $statement->transaction_description }}</td>
+                          <td class="px-3 py-1 text-xs whitespace-nowrap "> {{ $statement->transaction_date }}</td>
+                          {{-- <td class="px-3 py-1 text-xs whitespace-nowrap "> {{ date("F j, Y, g:i a") }}</td> --}}
+
                       </tr>
                       @endforeach
         
