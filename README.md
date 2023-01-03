@@ -11,3 +11,7 @@ Expense Tracker is a very simpmle tracking app to help you be incontroll of your
 - Compy the example .env file
 - Generate a new app key
 - Migrate the database
+
+### Technologies
+
+PHP Laravel and tailwing
